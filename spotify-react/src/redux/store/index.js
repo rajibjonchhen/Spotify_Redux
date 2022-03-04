@@ -13,7 +13,9 @@ export const initialState = {
     song:{
         songs:[],
         category:'',
-        searchQuery:''
+        searchQuery:'',
+        singleSong:{},
+        home:{}
     },
     album:{
         albums:[]
