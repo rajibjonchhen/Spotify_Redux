@@ -1,11 +1,18 @@
 import React from "react";
 import { Row } from "react-bootstrap";
+import { connect } from "react-redux";
 
-const Player = () => (
+const mapStateToProps =(state) => ({
+  singleSong : state.song.singleSong
+})
+
+const Player = ({singleSong}) => (
   <div className="container-fluid fixed-bottom bg-container pt-1">
     <Row>
+      
       <div className="col-lg-10 offset-lg-2">
-        <Row>
+        <Row className='text-center'>
+           <p className=" w-100 text-white " style={{fontSize:'12px'}}>{singleSong.title}</p> 
           <div className="col-6 col-md-4 col-lg-2 offset-3 offset-md-4 offset-lg-5 playerControls mt-1">
             <Row>
               <a href="/">
@@ -13,7 +20,7 @@ const Player = () => (
               </a>
               <a href="/">
                 <img src="/playerbuttons/Previous.png" alt="shuffle" />
-              </a>
+              </a> 
               <a href="/">
                 <img src="/playerbuttons/Play.png" alt="shuffle" />
               </a>
@@ -41,7 +48,10 @@ const Player = () => (
         </Row>
       </div>
     </Row>
+    <div>
+        <img src={singleSong.preview} alt={singleSong.title }/>
+      </div>
   </div>
 );
 
-export default Player;
+export default connect(mapStateToProps)(Player);

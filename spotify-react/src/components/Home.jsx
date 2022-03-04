@@ -112,7 +112,7 @@ class Home extends React.Component {
             <div>DISCOVER</div>
           </div>
         </Row>
-        {this.props.searchQuery && this.props.songs.length > 0 ? (
+        { this.props.songs.length>0? (
           <Row>
             <Col xs={10}>
               <div id='searchResults'>
@@ -125,14 +125,14 @@ class Home extends React.Component {
               </div>
             </Col>
           </Row>
-        ) : this.props.homePageSongs?.reverse().map(list =>
+        ) : (this.props.homePageSongs?.reverse().map(list =>
           <>
             <Row>
               <Col xs={10}>
                 <div id='rock'>
                   <h2>{list.category}</h2>
                   <Row
-                    className='row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3'
+                    className='display-cards row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3'
                     id='rockSection'
                   >
                     {list.homeSongs.reverse().map((song) => (
@@ -142,38 +142,9 @@ class Home extends React.Component {
                 </div>
               </Col>
             </Row>
-            {/* <Row>
-              <Col xs={10}>
-                <div id='pop'>
-                  <h2>Pop Culture</h2>
-                  <Row
-                    className='row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3'
-                    id='popSection'
-                  >
-                    {this.props.songs.map((song) => (
-                      <AlbumCard song={song} key={song?.id} />
-                    ))}
-                  </Row>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={10}>
-                <div id='hiphop'>
-                  <h2>#HipHop</h2>
-                  <Row
-                    className='row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3'
-                    id='hipHopSection'
-                  >
-                    {this.props.songs.map((song) => (
-                      <AlbumCard song={song} key={song?.id} />
-                    ))}
-                  </Row>
-                </div>
-              </Col>
-            </Row> */}
-          </>
+            </>)
         )}
+  
       </Col>
     )
   }
