@@ -62,6 +62,11 @@ class Sidebar extends React.Component {
                       Library
                     </Link>
                   </li>
+                  <li>
+                    <Link to="/likedSongs" className="nav-item nav-link">
+                      <i className="fas fa-heart fa-lg"></i>&nbsp; Liked songs
+                    </Link>
+                  </li>
                   {this.props.location.pathname === "/" && (
                     <li>
                       <div className="input-group mt-3">

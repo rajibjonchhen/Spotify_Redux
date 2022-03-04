@@ -7,9 +7,25 @@ export const ACTIONS= {
     SINGLE_SONG : "SINGLE_SONG",
     IS_LOADING : "IS_LOADING",
     IS_ERROR : "IS_ERROR",
-    SET_HOME_PAGE_SONGS : "SET_HOME_PAGE_SONGS"
+    SET_HOME_PAGE_SONGS : "SET_HOME_PAGE_SONGS",
+    ADD_SONG_TO_LIKES:'ADD_SONG_TO_LIKES',
+    REMOVE_FROM_LIKES:"REMOVE_FROM_LIKES"
 }
 
+export const addSongToLikesAction = (song) =>({
+  type:ACTIONS.ADD_SONG_TO_LIKES,
+  payload:song
+
+})
+
+export const removeFromSongList =(song)=> {
+  return (dispatch)=> {
+    dispatch({
+      type:ACTIONS.REMOVE_FROM_LIKES,
+      payload:song
+    })
+  }
+}
 export const searchQueryAction =(searchQuery)=>({
   type:ACTIONS.SEARCH_QUERY,
   payload:searchQuery
