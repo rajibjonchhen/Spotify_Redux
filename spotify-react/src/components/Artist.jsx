@@ -1,6 +1,16 @@
 import React from "react";
 import AlbumCard from "./AlbumCard";
 import { Row, Col } from "react-bootstrap";
+import { connect } from "react-redux";
+import { singleSongAction } from "../redux/actions";
+
+const mapStateToProps = (state) => ({
+})
+const mapDispatchToProps = (dispatch) => ({
+  setSingleSong : (singleSong) => {
+    dispatch(singleSongAction(singleSong))
+  }
+})
 
 class Artist extends React.Component {
   state = {
@@ -108,4 +118,4 @@ class Artist extends React.Component {
   }
 }
 
-export default Artist;
+export default connect(mapStateToProps, mapDispatchToProps)(Artist);

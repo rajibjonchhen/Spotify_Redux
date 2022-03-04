@@ -15,7 +15,9 @@ export const initialState = {
         category:'',
         searchQuery:'',
         singleSong:{},
-        home:{}
+        homePageSongs:[],
+        isLoading:true,
+        isError:false,
     },
     album:{
         albums:[]

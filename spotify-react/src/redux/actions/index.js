@@ -4,7 +4,10 @@ export const ACTIONS= {
     GET_ALBUMS:"GET_ALBUMS",
     SET_CATEGORY:"SET_CATEGORY",
     SEARCH_QUERY : "SEARCH_QUERY",
-    SINGLE_SONG : "SINGLE_SONG"
+    SINGLE_SONG : "SINGLE_SONG",
+    IS_LOADING : "IS_LOADING",
+    IS_ERROR : "IS_ERROR",
+    SET_HOME_PAGE_SONGS : "SET_HOME_PAGE_SONGS"
 }
 
 export const searchQueryAction =(searchQuery)=>({
@@ -13,16 +16,16 @@ export const searchQueryAction =(searchQuery)=>({
 })
 
 export const singleSongAction =(singleSong)=>({
-  type:ACTIONS.SEARCH_QUERY,
+  type:ACTIONS.SINGLE_SONG,
   payload:singleSong
 })
 
-export const getSongsAction =(artist_name, category)=> {
+export const getSongsAction =(query, category)=> {
     return async(dispatch)=> {
         try {
             let response = await fetch(
               'https://striveschool-api.herokuapp.com/api/deezer/search?q=' +
-              artist_name,
+              query,
               {
                 method: 'GET',
                 headers: new Headers({
@@ -39,17 +42,50 @@ export const getSongsAction =(artist_name, category)=> {
               // this.setState({
               //   [category]: [...this.state[category], songInfo[0]],
               // })
+              if(!category){
+                dispatch({
+                  type:ACTIONS.GET_SONGS,
+                  payload:songInfo
+                })
+                dispatch({
+                  type: ACTIONS.SET_CATEGORY,
+                  payload: category
+                })
+                dispatch({
+                  type : ACTIONS.IS_LOADING,
+                  payload:false
+                })
+              } else{
+                dispatch({
+                  type: ACTIONS.SET_HOME_PAGE_SONGS,
+                  payload : { category : category, homeSongs:songInfo}
+                })
+                dispatch({
+                  type: ACTIONS.SET_CATEGORY,
+                  payload: category
+                })
+                dispatch({
+                  type : ACTIONS.IS_LOADING,
+                  payload:false
+                })
+              }
+
+            } else {
               dispatch({
-                type:ACTIONS.GET_SONGS,
-                payload:songInfo
+                type : ACTIONS.IS_ERROR,
+                payload:true
               })
               dispatch({
-                type: ACTIONS.SET_CATEGORY,
-                payload: category
+                type : ACTIONS.IS_LOADING,
+                payload:false
               })
             }
           } catch (err) {
             console.log(err)
+            dispatch({
+              type : ACTIONS.IS_ERROR,
+              payload:true
+            })
           }
     }
 }

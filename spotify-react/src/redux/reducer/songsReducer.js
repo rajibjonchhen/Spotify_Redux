@@ -25,6 +25,12 @@ const songsReducer = (state=initialState.song, action)=> {
                 singleSong:action.payload
         }
 
+        case ACTIONS.SET_HOME_PAGE_SONGS: 
+        return {
+            ...state,
+            homePageSongs: [...state.homePageSongs, action.payload]
+        }
+
         default:return state
     }
 }
