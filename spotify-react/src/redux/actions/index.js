@@ -3,9 +3,25 @@ export const ACTIONS= {
     GET_ARTIST:"GET_ARTIST",
     GET_ALBUMS:"GET_ALBUMS",
     SET_CATEGORY:"SET_CATEGORY",
-    SEARCH_QUERY :"SEARCH_QUERY"
+    SEARCH_QUERY :"SEARCH_QUERY",
+    ADD_SONG_TO_LIKES:'ADD_SONG_TO_LIKES',
+    REMOVE_FROM_LIKES:"REMOVE_FROM_LIKES"
 }
 
+export const addSongToLikesAction = (song) =>({
+  type:ACTIONS.ADD_SONG_TO_LIKES,
+  payload:song
+
+})
+
+export const removeFromSongList =(song)=> {
+  return (dispatch)=> {
+    dispatch({
+      type:ACTIONS.REMOVE_FROM_LIKES,
+      payload:song
+    })
+  }
+}
 export const searchQueryAction =(searchQuery)=>({
   type:ACTIONS.SEARCH_QUERY,
   payload:searchQuery

@@ -2,6 +2,7 @@ import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import albumsReducer from '../reducer/albumsReducer'
 import artistsReducer from '../reducer/artistsReducer'
+import { favoriteSongReducer } from '../reducer/favoriteSongReducer'
 import songsReducer from '../reducer/songsReducer'
 
 // window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -10,6 +11,11 @@ const composeThatAlwaysWorks = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || co
 
 
 export const initialState = {
+    likes:{
+        songs:[],
+        albums:[],
+        artists:[]
+    },
     song:{
         songs:[],
         category:'',
@@ -31,7 +37,8 @@ export const initialState = {
 const multiReducer = combineReducers({
     song: songsReducer,
     album: albumsReducer,
-    artist:artistsReducer
+    artist:artistsReducer,
+    likes:favoriteSongReducer
 })
 
 // *************** CONFIGURATION STOREE HERE *****************
