@@ -19,6 +19,12 @@ const songsReducer = (state=initialState.song, action)=> {
                 ...state,
                 searchQuery:action.payload
             }
+        case ACTIONS.SINGLE_SONG: 
+            return {
+                ...state,
+                singleSong:action.payload
+        }
+
         default:return state
     }
 }
