@@ -8,6 +8,11 @@ export const favoriteSongReducer =(state = initialState.likes, action)=> {
                ...state,
                favSong:[...state.favSong, action.payload]
            }
+        case ACTIONS.REMOVE_FROM_LIKES:
+            return {
+                ...state,
+                favSong:state.favSong.filter((song, i)=> song.id !== action.payload)
+            }
         default: return state   
     }
     

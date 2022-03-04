@@ -1,56 +1,58 @@
 import { connect } from "react-redux";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { removeFromSongListAction } from "../redux/actions";
+import { removeFromSongListAction, singleSongAction } from "../redux/actions";
+import { Container, Row, Col } from "react-bootstrap";
 
 const mapStateToProps = (state) => ({
   likedSongs: state.likes.favSong,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  removeSongs: (song) => {
+    dispatch(removeFromSongListAction(song));
+  },
+  setSingleSong: (singleSong) => {
+    dispatch(singleSongAction(singleSong));
+  },
+});
 
-const mapDispatchToProps =(dispatch)=> ({
-    removeSongs:(song)=> {
-        dispatch(removeFromSongListAction(song))
-    }
-})
-
-const LikedSongs = ({ likedSongs, removeSongs }) => {
-    console.log("likesong", likedSongs);
+const LikedSongs = ({ likedSongs, removeSongs, setSingleSong }) => {
+  console.log("likesong", likedSongs);
   return (
-      <>
-      {likedSongs &&
-        likedSongs.map((song, i) => (
-          <div id="favourite-songs-container" className="bg-wrapper px-4">
-            <div className="row my-3">
-              <div className="col-12 album-action-icons d-flex align-items-center">
-                <i className="bi bi-play-circle-fill">
-                  <div className="white-bg"></div>
-                </i>
-                <i className="bi bi-three-dots"></i>
-                <RiDeleteBin6Line className="ml-auto" style={{ background: "#282C34", fontSize:"20px"}} onClick={() => {removeSongs(song)}}/>
+    <Container>
+          <h1 className="mb-3 text-light text-center"><strong>Favorite Song</strong></h1>
+      <Row className="d-flex justify-content-center">
+          
+        <Col md={12}>
+          {likedSongs &&
+            likedSongs.map((song) => (
+              <div className="py-3 trackHover">
+                <span
+                  className="card-title trackHover px-3"
+                  onClick={() => setSingleSong(song)}
+                  style={{ color: "white" }}
+                >
+                  {song.title}
+                </span>
+                <small className="duration" style={{ color: "white" }}>
+                  {Math.floor(parseInt(song.duration) / 60)}:
+                  {parseInt(song.duration) % 60 < 10
+                    ? "0" + (parseInt(song.duration) % 60)
+                    : parseInt(song.duration) % 60}
+                  <span>
+                    <i
+                      class="ml-4 bi bi-heart-fill"
+                      onClick={() => {
+                        removeSongs(song);
+                      }}
+                    ></i>
+                  </span>
+                </small>
               </div>
-            </div>
-
-            <div className="row light-gray-text">
-              <div className="col-1">
-                <p>#</p>
-              </div>
-
-              <div className="col-10">
-                <p>{song.title}</p>
-              </div>
-
-              <div className="col-1">
-                <p>
-                  <i className="bi bi-clock"></i>
-                </p>
-              </div>
-            </div>
-            <div className="divider"></div>
-          </div>
-        ))}
-    </>
-
-    
+            ))}
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
