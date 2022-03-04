@@ -3,12 +3,18 @@ export const ACTIONS= {
     GET_ARTIST:"GET_ARTIST",
     GET_ALBUMS:"GET_ALBUMS",
     SET_CATEGORY:"SET_CATEGORY",
-    SEARCH_QUERY :"SEARCH_QUERY"
+    SEARCH_QUERY : "SEARCH_QUERY",
+    SINGLE_SONG : "SINGLE_SONG"
 }
 
 export const searchQueryAction =(searchQuery)=>({
   type:ACTIONS.SEARCH_QUERY,
   payload:searchQuery
+})
+
+export const singleSongAction =(singleSong)=>({
+  type:ACTIONS.SEARCH_QUERY,
+  payload:singleSong
 })
 
 export const getSongsAction =(artist_name, category)=> {
