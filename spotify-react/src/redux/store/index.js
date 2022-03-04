@@ -12,7 +12,7 @@ const composeThatAlwaysWorks = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || co
 
 export const initialState = {
     likes:{
-        songs:[],
+        favSong:[],
         albums:[],
         artists:[]
     },
