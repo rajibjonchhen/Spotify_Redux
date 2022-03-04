@@ -1,7 +1,20 @@
 import React from 'react'
 import AlbumCard from './AlbumCard'
 import { Row, Col } from 'react-bootstrap'
+import {connect} from 'react-redux'
+import { getSongsAction } from '../redux/actions'
 
+const mapStateToProps =(state)=> ({
+  songs:state.song.songs,
+  searchQuery:state.song.searchQuery
+})
+
+const mapDispatchToProps =(dispatch)=> ({
+  getSongs:(artistName, category)=> {
+    dispatch(getSongsAction(artistName, category))
+  }
+})
+ 
 class Home extends React.Component {
   state = {
     rockSongs: [],
@@ -31,27 +44,7 @@ class Home extends React.Component {
   hipHopArtists = ['eminem', 'snoopdogg', 'lilwayne', 'drake', 'kanyewest']
 
   handleArtist = async (artistName, category) => {
-    try {
-      let response = await fetch(
-        'https://striveschool-api.herokuapp.com/api/deezer/search?q=' +
-          artistName,
-        {
-          method: 'GET',
-          headers: new Headers({
-            'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com',
-            'X-RapidAPI-Key':
-              '9d408f0366mshab3b0fd8e5ecdf7p1b09f2jsne682a1797fa0',
-          }),
-        }
-      )
-      let result = await response.json()
-      let songInfo = result.data
-      this.setState({
-        [category]: [...this.state[category], songInfo[0]],
-      })
-    } catch (err) {
-      console.log(err)
-    }
+    this.props.getSongs(artistName, category)
   }
 
   componentDidMount = async () => {
@@ -107,13 +100,13 @@ class Home extends React.Component {
             <div>DISCOVER</div>
           </div>
         </Row>
-        {this.props.searchResults.length > 0 && (
+        {this.props.searchQuery && this.props.songs.length > 0 && (
           <Row>
             <Col xs={10}>
               <div id='searchResults'>
                 <h2>Search Results</h2>
                 <Row className='row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3'>
-                  {this.props.searchResults.map((song) => (
+                  {this.props.songs.map((song) => (
                     <AlbumCard song={song} key={song.id} />
                   ))}
                 </Row>
@@ -131,7 +124,7 @@ class Home extends React.Component {
                     className='row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3'
                     id='rockSection'
                   >
-                    {this.state.rockSongs.map((song) => (
+                    {this.props.songs.map((song) => (
                       <AlbumCard song={song} key={song?.id} />
                     ))}
                   </Row>
@@ -146,7 +139,7 @@ class Home extends React.Component {
                     className='row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3'
                     id='popSection'
                   >
-                    {this.state.popSongs.map((song) => (
+                    {this.props.songs.map((song) => (
                       <AlbumCard song={song} key={song?.id} />
                     ))}
                   </Row>
@@ -161,7 +154,7 @@ class Home extends React.Component {
                     className='row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3'
                     id='hipHopSection'
                   >
-                    {this.state.hipHopSongs.map((song) => (
+                    {this.props.songs.map((song) => (
                       <AlbumCard song={song} key={song?.id} />
                     ))}
                   </Row>
@@ -175,4 +168,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -11,7 +11,9 @@ const composeThatAlwaysWorks = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || co
 
 export const initialState = {
     song:{
-        songs:[]
+        songs:[],
+        category:'',
+        searchQuery:''
     },
     album:{
         albums:[]
@@ -19,6 +21,7 @@ export const initialState = {
     artist:{
         artists:[]
     }
+    
 
 }
 

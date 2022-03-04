@@ -1,5 +1,20 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import {connect} from 'react-redux'
+import { getSongsAction, searchQueryAction } from "../redux/actions";
+
+const mapStateToProps =(state)=> ({
+  searchQuery:state.song.searchQuery
+})
+
+const mapDispatchToProps =(dispatch)=> ({
+  setSearchQuery:(searchQuery)=> {
+    dispatch(searchQueryAction(searchQuery))
+  },
+  getSongs:(searchQuery) =>{
+    dispatch(getSongsAction(searchQuery))
+  }
+})
 
 class Sidebar extends React.Component {
   state = {
@@ -72,7 +87,7 @@ class Sidebar extends React.Component {
                             type="button"
                             id="button-addon1"
                             onClick={() =>
-                              this.props.search(this.state.searchInput)
+                             { this.props.search(this.state.searchInput); this.props.getSongs(this.state.searchInput)}
                             }
                           >
                             GO
@@ -101,4 +116,4 @@ class Sidebar extends React.Component {
   }
 }
 
-export default withRouter(Sidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Sidebar));
