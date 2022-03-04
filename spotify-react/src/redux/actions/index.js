@@ -38,6 +38,12 @@ export const singleSongAction =(singleSong)=>({
 
 export const getSongsAction =(query, category)=> {
     return async(dispatch)=> {
+            if(!category){
+              dispatch({
+                type : ACTIONS.IS_LOADING,
+                payload:true
+              })
+            }
         try {
             let response = await fetch(
               'https://striveschool-api.herokuapp.com/api/deezer/search?q=' +

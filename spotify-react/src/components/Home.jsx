@@ -3,6 +3,7 @@ import AlbumCard from './AlbumCard'
 import { Row, Col } from 'react-bootstrap'
 import {connect} from 'react-redux'
 import { getSongsAction } from '../redux/actions'
+import Loader from './Loader'
 
 const mapStateToProps =(state)=> ({
   songs:state.song.songs,
@@ -87,7 +88,7 @@ class Home extends React.Component {
     // }
     // for (let k = 0; k < popRandomArtists.length; k++)
       // await this.handleArtist(popRandomArtists[k], 'popSongs')
-      await this.handleArtist("pop", 'Pop Songs')
+      await this.handleArtist("hiphop", 'Hiphop Songs')
 
     // for (let j = 0; j < rockRandomArtists.length; j++)
       // await this.handleArtist(rockRandomArtists[j], 'rockSongs')
@@ -112,7 +113,7 @@ class Home extends React.Component {
             <div>DISCOVER</div>
           </div>
         </Row>
-        { this.props.songs.length>0? (
+        { this.props.isLoading? (<Loader/>): this.props.songs.length>0? (
           <Row>
             <Col xs={10}>
               <div id='searchResults'>
@@ -132,8 +133,7 @@ class Home extends React.Component {
                 <div id='rock'>
                   <h2>{list.category}</h2>
                   <Row
-                    className='display-cards row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3'
-                    id='rockSection'
+                    className='display-songs-cards row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3'
                   >
                     {list.homeSongs.reverse().map((song) => (
                       <AlbumCard song={song} key={song?.id} />

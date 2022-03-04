@@ -13,6 +13,9 @@ const mapDispatchToProps =(dispatch)=> ({
   },
   getSongs:(searchQuery) =>{
     dispatch(getSongsAction(searchQuery))
+  },
+  setSearchQuery: (query) => {
+   dispatch(searchQueryAction(query)) 
   }
 })
 
@@ -35,6 +38,7 @@ class Sidebar extends React.Component {
                 alt="Spotify_Logo"
                 width="131"
                 height="40"
+                onClick={() => this.props.setSearchQuery("")}
               />
             </Link>
             <button

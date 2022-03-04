@@ -10,6 +10,11 @@ body {
   );
 }
 
+/* HOME SECTION */
+.display-songs-cards{
+overflow-x: scroll;
+flex-wrap: nowrap;
+}
 /*SIDEBAR SECTION*/
 .navbar.fixed-left {
   position: fixed;

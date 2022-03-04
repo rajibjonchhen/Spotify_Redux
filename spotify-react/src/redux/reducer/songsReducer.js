@@ -31,6 +31,11 @@ const songsReducer = (state=initialState.song, action)=> {
             homePageSongs: [...state.homePageSongs, action.payload]
         }
 
+        case ACTIONS.IS_LOADING: 
+        return {
+            ...state,
+            isLoading : action.payload
+        }
         default:return state
     }
 }
