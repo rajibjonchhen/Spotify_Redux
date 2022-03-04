@@ -1,0 +1,5 @@
+export const ACTIONS= {
+    GET_SONGS:"GET_SONGS",
+    GET_ARTIST:"GET_ARTIST",
+    GET_ALBUMS:"GET_ALBUMS"
+}
