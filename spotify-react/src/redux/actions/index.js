@@ -18,7 +18,7 @@ export const addSongToLikesAction = (song) =>({
 
 })
 
-export const removeFromSongList =(song)=> {
+export const removeFromSongListAction =(song)=> {
   return (dispatch)=> {
     dispatch({
       type:ACTIONS.REMOVE_FROM_LIKES,
