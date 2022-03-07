@@ -57,6 +57,7 @@ class Home extends React.Component {
   }
 
   componentDidMount = async () => {
+    await this.fetchData()
     // let rockRandomArtists = []
     // let popRandomArtists = []
     // let hipHopRandomArtists = []
@@ -88,16 +89,26 @@ class Home extends React.Component {
     // }
     // for (let k = 0; k < popRandomArtists.length; k++)
       // await this.handleArtist(popRandomArtists[k], 'popSongs')
-      await this.handleArtist("hiphop", 'Hiphop Songs')
-
-    // for (let j = 0; j < rockRandomArtists.length; j++)
+      
+      // for (let j = 0; j < rockRandomArtists.length; j++)
       // await this.handleArtist(rockRandomArtists[j], 'rockSongs')
-      await this.handleArtist('rock', 'Rock Songs')
       
       // for (let l = 0; l < hipHopRandomArtists.length; l++)
       // await this.handleArtist(hipHopRandomArtists[l], 'hipHopSongs')
-      await this.handleArtist("hit", 'Hit Songs')
       
+    }
+
+    // componentDidUpdate = (prevProps, prevState) => {
+    //   console.log('prevProps, prevState',prevProps, prevState);
+    //   if(prevProps.searchQuery !== this.props.searchQuery){
+    //     this.fetchData()
+    //   }
+    // }
+    
+    fetchData = async() => {
+      await this.handleArtist("hiphop", 'Hiphop Songs')
+      await this.handleArtist('rock', 'Rock Songs')
+      await this.handleArtist("hit", 'Hit Songs')
       await this.handleArtist("classic", 'Classic Songs')
   }
 
@@ -113,7 +124,7 @@ class Home extends React.Component {
             <div>DISCOVER</div>
           </div>
         </Row>
-        { this.props.isLoading? (<Loader/>): this.props.songs.length>0? (
+        { this.props.isLoading? (<Loader/>): this.props.songs.length>0 && this.props.searchQuery? (
           <Row>
             <Col xs={10}>
               <div id='searchResults'>

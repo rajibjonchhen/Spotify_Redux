@@ -29,20 +29,21 @@ const mapDispatchToProps = (dispatch) => ({
       setIsLiked(like)
     },[])
     return(
-
-      <div className="py-3 trackHover" >
-    <span className="card-title trackHover px-3" onClick={() => setSingleSong(track)} style={{ color: "white" }}>
-      {track.title}
-    </span>
-    <small className="duration" style={{ color: "white" }}>
-      {Math.floor(parseInt(track.duration) / 60)}:
-      {parseInt(track.duration) % 60 < 10
-        ? "0" + (parseInt(track.duration) % 60)
-        : parseInt(track.duration) % 60}
-  
-    <span style={{display:!isLiked ? "block":"none"}}> <i class="ml-4 bi bi-heart" onClick={()=> {addTofavorite(track); setIsLiked(true)}}></i></span>
-    <span style={{display:isLiked ? "block":"none"}}><i class="ml-4 bi bi-heart-fill" onClick={()=> {removeFromSong(track); setIsLiked(false)}}></i></span>
-    </small>
+    <div className="p-3 trackHover w-100 d-flex justify-content-between" >
+      <div className="d-flex justify-content-between w-100" >
+      <span className="card-title trackHover px-3" onClick={() => setSingleSong(track)} style={{ color: "white" }}>
+        {track.title}
+      </span>
+      <small className="duration" style={{ color: "white" }}>
+        {Math.floor(parseInt(track.duration) / 60)}:
+        {parseInt(track.duration) % 60 < 10
+          ? "0" + (parseInt(track.duration) % 60)
+          : parseInt(track.duration) % 60}
+    
+      </small>
+    </div>
+    <span style={{display:!isLiked ? "block":"none"}}> <i class="text-white ml-4 bi bi-heart" onClick={()=> {addTofavorite(track); setIsLiked(true)}}></i></span>
+    <span style={{display:isLiked ? "block":"none"}}><i class="text-white  ml-4 bi bi-heart-fill" onClick={()=> {removeFromSong(track); setIsLiked(false)}}></i></span>
   </div>
         )
   };

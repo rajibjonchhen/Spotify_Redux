@@ -30,6 +30,9 @@ const Player = ({singleSong}) => (
               <a href="/">
                 <img src="/playerbuttons/Repeat.png" alt="shuffle" />
               </a>
+      <div>
+        <img src={singleSong.cover} alt={singleSong.title } style={{width:'50px'}}/>
+      </div>
             </Row>
           </div>
         </Row>
@@ -48,9 +51,6 @@ const Player = ({singleSong}) => (
         </Row>
       </div>
     </Row>
-    <div>
-        <img src={singleSong.preview} alt={singleSong.title }/>
-      </div>
   </div>
 );
 
